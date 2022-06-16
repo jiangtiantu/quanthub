@@ -10,7 +10,7 @@ from plutus.position.position_cal.cal_position_base import (
 class CalPositionMom(CalPosition):
     def __init__(
         self,
-        position_dir: str = "/mnt/gitee/quanthub/position/",
+        position_dir: str = "/mnt/gitee/quanthub/positionhub/",
         signal_df_list: Union[list, None] = None,
         rt_md_df: Union[pd.DataFrame, None] = None,
         symbol_info: Union[pd.DataFrame, None] = None,
