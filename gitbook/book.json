@@ -1,0 +1,161 @@
+{
+    "gitbook": "3.x.x",
+    "plugins": [
+        "favicon",
+        "yahei",
+        "github",
+        "autotheme",
+        "-lunr",
+        "-search",
+        "search-plus",
+        "prism",
+        "-highlight",
+        "github-buttons",
+        "splitter",
+        "-sharing",
+        "sharing-plus",
+        "tbfed-pagefooter",
+        "expandable-chapters-small",
+        "book-summary-scroll-position-saver",
+        "ga",
+        "baidu",
+        "donate",
+        "anchors",
+        "anchor-navigation-ex",
+        "copy-code-button"
+    ],
+    "pluginsConfig": {
+        "theme-default": {
+            "showLevel": true
+        },
+        "fontSettings": {
+            "family": "serif",
+            "size": 2
+        },
+        "github": {
+            "url": "https://github.com/jiangtiantu/quanthub"
+        },
+        "autotheme": {
+            "night": [
+                20,
+                21,
+                22,
+                23,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "white": [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17
+            ],
+            "sepia": [
+                6,
+                7,
+                8,
+                18,
+                19
+            ]
+           
+        },
+        "prism": {
+            "css": [
+                "prismjs/themes/prism-tomorrow.css"
+            ]
+        },
+        "github-buttons": {
+            "buttons": [
+                {
+                    "user": "jiangtiantu",
+                    "repo": "quanthub",
+                    "type": "star",
+                    "size": "small",
+                    "count": true
+                }
+            ]
+        },
+        "tbfed-pagefooter": {
+            "modify_label": "修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "ga": {
+            "token": "UA-142790104-1"
+        },
+        "baidu": {
+            "token": "f1f256f18b7899e11647d6ec1f3ded2f"
+        },
+        "donate": {
+            "wechat": "/assets/weixin.png",
+            "alipay": "/assets/alipay.jpeg",
+            "title": "",
+            "button": "赏",
+            "alipayText": "支付宝打赏",
+            "wechatText": "微信打赏"
+        },
+        "anchor-navigation-ex": {
+            "showLevel": true,
+            "associatedWithSummary": false,
+            "printLog": false,
+            "multipleH1": true,
+            "mode": "float",
+            "showGoTop": true,
+            "float": {
+                "floatIcon": "fa fa-navicon",
+                "showLevelIcon": false,
+                "level1Icon": "fa fa-hand-o-right",
+                "level2Icon": "fa fa-hand-o-right",
+                "level3Icon": "fa fa-hand-o-right"
+            },
+            "pageTop": {
+                "showLevelIcon": false,
+                "level1Icon": "fa fa-hand-o-right",
+                "level2Icon": "fa fa-hand-o-right",
+                "level3Icon": "fa fa-hand-o-right"
+            }
+        },
+        "favicon": {
+            "shortcut": "/assets/images/favicon.ico",
+            "bookmark": "/assets/images/favicon.ico",
+            "appleTouch": "/assets/images/apple-touch-icon.png",
+            "appleTouchMore": {
+                "120x120": "/assets/images/apple-touch-icon-120x120.png",
+                "180x180": "/assets/images/apple-touch-icon-180x180.png"
+            }
+        }
+    },
+    "pdf": {
+        "pageNumbers": true,
+        "fontFamily": "Arial",
+        "fontSize": 12,
+        "paperSize": "a4",
+        "margin": {
+            "right": 62,
+            "left": 62,
+            "top": 56,
+            "bottom": 56
+        }
+    },
+    "title": "quanthub",
+    "description": "quanthub",
+    "author": "jiangtiantu",
+    "language": "zh-hans",
+    "root": ".",
+    "structure": {
+        "readme": "README.md"
+    },
+    "links": {
+        "sidebar": {
+            "Gitee": "https://github.com/jiangtiantu/quanthub"
+        }
+    }
+}

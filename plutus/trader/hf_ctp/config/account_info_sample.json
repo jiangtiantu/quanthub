@@ -1,0 +1,13 @@
+{
+  "simnow": {
+    "name": "simnow",
+    "type": "ctpmn",
+    "broker_id": "9999",
+    "app_id": "simnow_client_test",
+    "auth_code": "0000000000000000",
+    "trading_fronts": "tcp://180.168.146.187:10201",
+    "md_fronts": "tcp://180.166.37.142:43213",
+    "user_id": "079501",
+    "pass_word": "siq6412459"
+  }
+}
