@@ -13,7 +13,7 @@ class Mom(CnFutureMd1m):
         """
         super(Mom, self).__init__(md_data)
 
-    def factor_cs_1d_example1(self):
+    def factor_cs_1m_example1(self):
         """
         示例因子1
         :param close:
@@ -21,7 +21,7 @@ class Mom(CnFutureMd1m):
         """
         pass
 
-    def factor_cs_1d_example2(self):
+    def factor_cs_1m_example2(self):
         """
         示例因子2
         :param close:
