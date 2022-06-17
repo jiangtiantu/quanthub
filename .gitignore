@@ -612,7 +612,7 @@ cython_debug/
 nohup.out
 !/.vscode/
 !/researchhub/.idea/
-/plutus/config/
+#/plutus/config/
 /researchhub/5 Trader and Oversight/scan/cal_position/cfg/
 
 /.vscode/
