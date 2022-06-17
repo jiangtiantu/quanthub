@@ -123,7 +123,7 @@ class ClickHouse:
 
     def __trans_df_types(self, df: pd.DataFrame):
         """
-        转换dataframe 的数据类型为clickhouse数据类型
+        转换 dataframe 的数据类型为clickhouse数据类型
         :param df:
         :return:
         """

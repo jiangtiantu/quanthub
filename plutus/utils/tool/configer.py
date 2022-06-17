@@ -16,7 +16,6 @@ class Configer:
         获取配置信息
         :return:
         """
-        # _conf_path = os.path.join(self.root_dir,'plutus/utils/src/config/', 'config.ini')
         _conf_path = os.path.join(self.config_path, "config.ini")
 
         config = configparser.ConfigParser()
