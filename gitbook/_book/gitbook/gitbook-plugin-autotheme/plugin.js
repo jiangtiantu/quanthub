@@ -15,7 +15,7 @@ require(['gitbook'], function (gitbook) {
 			for (var i = 0; i < classes.length; i++) {
 				push.call(this, classes[i]);
 			}
-		};
+		}
 
 		DOMTokenList.prototype = {
 			add: function(token) {
@@ -83,7 +83,7 @@ require(['gitbook'], function (gitbook) {
 				div.classList.remove(classes[i]);
 			}
 		}
-	};
+	}
 	
 	function changeTheme() {
 		var now = new Date();
@@ -95,7 +95,7 @@ require(['gitbook'], function (gitbook) {
 		} else if (night.indexOf(hour) > -1) {
 			toggleClass('color-theme-2');
 		}
-	};
+	}
 	gitbook.events.bind('start', function (e, config) {
 		white = config.autotheme.white || [9, 10, 11, 12, 13, 14, 15, 16];
 		sepia = config.autotheme.sepia || [6, 7, 8, 17, 18, 19];
