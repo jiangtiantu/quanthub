@@ -1,6 +1,6 @@
 <p>
 <p align="center">
-    <img src="../doc/images/quanthub_row.png">
+    <img src="https://s1.328888.xyz/2022/06/17/0LGiy.png">
 </p>
 
 <p align="center">
