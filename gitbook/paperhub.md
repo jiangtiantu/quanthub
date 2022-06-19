@@ -11,7 +11,7 @@
     - 高频
     - 债券
     - 资产配置
-    - 下载地址：ttps://www.aliyundrive.com/s/9FaFAbS5SEA 提取码: qu20
+    - 下载地址：https://www.aliyundrive.com/s/9FaFAbS5SEA 提取码: qu20
 
 - 视频等学习资料：
   - blablabla
