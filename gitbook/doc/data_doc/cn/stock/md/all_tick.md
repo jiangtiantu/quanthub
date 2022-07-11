@@ -1,0 +1,36 @@
+# all_tick
+
+| 字段         | 数据类型      | 含义       |
+| ------------ | ------------- | ---------- |
+| trading_date | DateTime64(3) | 交易日     |
+| datetime     | DateTime64(3) | 交易时间   |
+| code         | String        | 股票代码   |
+| open         | Float64       | 开盘价     |
+| high         | Float64       | 最高价     |
+| low          | Float64       | 最低价     |
+| pre_close    | Float64       | 昨日收盘价 |
+| turnover     | Float64       | 成交额     |
+| volume       | Float64       | 成交量     |
+| up_limit     | Float64       | 涨停价     |
+| down_limit   | Float64       | 跌停价     |
+| last_price   | Float64       | 收盘价     |
+| bid_price1   | Float64       | 买一价     |
+| bid_vol1     | Float64       | 买一量     |
+| ask_price1   | Float64       | 卖一价     |
+| ask_vol1     | Float64       | 卖一量     |
+| bid_price2   | Float64       | 买二价     |
+| bid_vol2     | Float64       | 买二量     |
+| ask_price2   | Float64       | 卖二价     |
+| ask_vol2     | Float64       | 卖二量     |
+| bid_price3   | Float64       | 买三价     |
+| bid_vol3     | Float64       | 买三量     |
+| ask_price3   | Float64       | 卖三价     |
+| ask_vol3     | Float64       | 卖三量     |
+| bid_price4   | Float64       | 买四价     |
+| bid_vol4     | Float64       | 买四量     |
+| ask_price4   | Float64       | 卖四价     |
+| ask_vol4     | Float64       | 卖四量     |
+| bid_price5   | Float64       | 买五价     |
+| bid_vol5     | Float64       | 买五量     |
+| ask_price5   | Float64       | 卖五价     |
+| ask_vol5     | Float64       | 卖五量     |

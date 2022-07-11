@@ -116,30 +116,30 @@ class BacktestTS(Backtest):
     def __init__(self):
         super().__init__()
 
-    def backtest_ts_vector_01(self, master_data: pd.DataFrame, signal: pd.Series):
+    def backtest_ts_vector_01(self, merge_data: pd.DataFrame, signal: pd.Series):
         """
         向量化回测时序类策略,日频
-        :param master_data: 日行情数据
+        :param merge_data: 日行情数据
         :param signal: 交易信号
         :return: 交易记录
         """
-        # close_diff=master_data["close"].diff()
-        close_diff = master_data["close"] - master_data["pre_close"]
+        # close_diff=merge_data["close"].diff()
+        close_diff = merge_data["close"] - merge_data["pre_close"]
         pnl_period = close_diff * signal.shift()
         pnl_period_cumsum = pnl_period.cumsum()
-        master_data["signal"] = signal
-        master_data["pnl_period"] = pnl_period
-        master_data["pnl_period_cumsum"] = pnl_period_cumsum
-        return master_data
+        merge_data["signal"] = signal
+        merge_data["pnl_period"] = pnl_period
+        merge_data["pnl_period_cumsum"] = pnl_period_cumsum
+        return merge_data
 
-    def backtest_ts_vector_02(self, master_data, signal):
+    def backtest_ts_vector_02(self, merge_data, signal):
         pass
 
-    def backtest_ts_vector_03(self, master_data, signal):
+    def backtest_ts_vector_03(self, merge_data, signal):
         pass
 
-    def describer(self, master_data):
-        PlotTS.plot_cumsum_pnl(master_data=master_data)
+    def describer(self, merge_data):
+        PlotTS.plot_cumsum_pnl(merge_data=merge_data)
 
 
 class BacktestCS(Backtest):
@@ -148,17 +148,17 @@ class BacktestCS(Backtest):
 
     def cal_factor_rank(
         self,
-        master_data: pd.DataFrame,
+        merge_data: pd.DataFrame,
         test_factor: pd.DataFrame,
     ):
         """
         将因子数据,只排序,不分组
-        :param master_data:包含trading_date,code,profit 的一个dataframe
+        :param merge_data:包含trading_date,code,profit 的一个dataframe
         :param test_factor:因子数据,一个dtaframe
         :return:只排序,不分组的clean_factor_data
         """
         test_factor = test_factor.replace([np.inf, -np.inf], np.nan)
-        clean_factor_data = master_data.copy()
+        clean_factor_data = merge_data.copy()
         input_factor = test_factor.copy().stack()
         clean_factor_data["factor"] = input_factor
         clean_factor_data = clean_factor_data.dropna()
@@ -226,18 +226,18 @@ class BacktestCS(Backtest):
 
     def backtest_cs_vector_01(
         self,
-        master_data: pd.DataFrame,
+        merge_data: pd.DataFrame,
         test_factor: pd.DataFrame,
         group_num: int = 2,
     ):
         """
         向量化回测界面类策略,日频,对因子数据排序并分组
-        :param master_data:包含trading_date,code,profit 的一个dataframe
+        :param merge_data:包含trading_date,code,profit 的一个dataframe
         :param test_factor: 因子数据,一个dtaframe
         :param group_num: 将标的按照因子数据,分为group_num 组
         :return: clean_factor_data 一个整理好的multi_index dataframe
         """
-        clean_factor_data1 = self.cal_factor_rank(master_data, test_factor)
+        clean_factor_data1 = self.cal_factor_rank(merge_data, test_factor)
         clean_factor_data2 = self.cal_factor_quantile(clean_factor_data1, group_num)
         return clean_factor_data2
 

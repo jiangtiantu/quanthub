@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 class PlotTS:
     @staticmethod
-    def plot_cumsum_pnl(master_data):
+    def plot_cumsum_pnl(merge_data):
         """
 
-        :param master_data:
+        :param merge_data:
         :return:
         """
-        master_data["pnl_period_cumsum"].plot()
+        merge_data["pnl_period_cumsum"].plot()
         plt.show()
 
 

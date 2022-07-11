@@ -11,16 +11,16 @@ class PortfolioBase(DatabaseControl):
         super(PortfolioBase, self).__init__()
 
     @staticmethod
-    def cal_pnl(signal_df, master_data):
+    def cal_pnl(signal_df, merge_data):
         """
         计算交易信号的pnl
         :param signal_df:信号数据
-        :param master_data:
+        :param merge_data:
         :return:
         """
-        master_data["signal"] = signal_df.set_index(["trading_date", "symbol"])["value"]
-        master_data.dropna(inplace=True)
-        pnl_df = (master_data["signal"] * master_data["period"]).groupby(level=0).mean()
+        merge_data["signal"] = signal_df.set_index(["trading_date", "symbol"])["value"]
+        merge_data.dropna(inplace=True)
+        pnl_df = (merge_data["signal"] * merge_data["period"]).groupby(level=0).mean()
         return pnl_df
 
     def cal_all_ret(self, signal_df, ret_chg_arr):
