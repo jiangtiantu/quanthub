@@ -1,0 +1,200 @@
+{
+    "./": {
+        "url": "./",
+        "title": "Introduction",
+        "keywords": "",
+        "body": " 报告问题 · 功能需求 一个轻量清晰,容易上手的,数据/投研/交易集成框架 🐼QuantHub简介(持续更新调整中ing) 首先 QuantHub 是个圈地自萌的小社区,里面的人个个是人才,长得好看(❤´艸｀❤),说话又好听。 其次 quanthub 是个体验感很好的量化集成框架,目前开源的是实际生产环境的一个简化版本,几乎涵盖了（数据/投研/组合/交易/分析）所有环节。 它足够简单,足够自由,你可以像搭积木一样,搭配自己喜欢的技术栈,让它成为最适合你的开发利器！ 它的架构肯定是没有问题的,几乎可以说是很标准了,搭配合适的技术栈,是可以成为一个企业级的框架的； 最后,感谢这两年多来,不断支持 QuantHub项目成长,给予帮助和建议的朋友🍑🍑🍑~ 项目地址： https://gitee.com/jiangtiantu/quanthub 文档地址： http://jiangtiantu.gitee.io/quanthub ✨ 工具特性 自由,自由,还是***D 自由,你可以随心所欲的魔改 DIY,可扩展,可升级； 简单,简单,足够轻松上手的简单,这是一整套完整的体系,来源于实际的各生产环节； 💻 项目结构 quanthub包含以下几个部分（请原谅我是个取名废材,o(////▽////)q）： datahub 这是一个落地数据库,你可以直接把你想要的数据放到本地,并通过data_sync进行每日同步更新。 储存形式任意,你可以按照自己的喜好进行选择,目前我实际生产环境用的clickhouse+parquet+duckdb； 该数据库包含：股票,期货,期权,基金的历史行情数据,以及相应的实时数据； 数据的ETL相关代码,请查阅plutus.data 模块 该数据库还包含,各种另类数据和基本面数据,具体内容,请查看datahub 文档； factorhub 这是落地一个因子数据库,可以是你喜欢的任意形式,为方便上传,该项目采用的parquet文件存储； 也是一个因子回测框架,包含截面因子回测和时序因子回测两大类； 投研环境下,相关回测逻辑,请阅读plutus.research模块 生产环境下,批量计算因子,请查看plutus.factor模块 因子面板(更新中); 一个因子交换和交流平台(目前是以微信群的方式),有想加入的小伙伴,请私下联系； 具体内容说明,请查看factorhub文档； signalhub 这是落地一个信号数据库,是对因子数据的进一步处理,可以是你喜欢的任意形式,为方便上传,该项目采用的parquet文件存储； 生产环境下,批量计算信号,请查看plutus.signal 模块 交易信号面板(更新中); 大部分人可能用不到这个模块,如果不需要篮子交易的话； 具体内容说明,请查看signalhub文档； positionhub 这是落地一个账户持仓数据库,是对信号数据的进一步处理,可以是你喜欢的任意形式； 生产环境下,批量计算信号,请查看plutus.position模块 大部分人可能用不到这个模块,如果不需要篮子交易,或者需要多账户交易的话； 具体内容说明,请查看positionhub文档； researhub 投研平台,本质是jupyter lab； 我对该模块的定义是存放,我们数据分析的各类notebook文件,以及各种测试代码； 具体内容说明,请查看researhub文档；paperhub 一个放资料的地方,包含各类视频和各种PDF等等文件,几乎你能在互联网上找到的所有可能有点用的学习资料 资料总大小大概200g 左右,分类如下： 股票 基金 期货 期权 资产配置 高频 债券 具体内容说明,请查看paperhub文档； tradehub 关于交易,我们的理念是,不同标的,不同策略,可能需要的交易框架是不一样的。你喜欢的,适合的就是最好的； 所以,我们直接集成了一些优秀的开源交易框架： wondertrader ctpbee fk_ctp 期待能与更多的开源框架作者建立联系,感谢你们为开源社区做出的贡献~ 具体内容说明,请查看tradehub文档；jobhub 一个方便同行进行招聘与求职的板块 目前是和以下金融ip小伙伴,同步更新,微信公众号,知乎等等自媒体； FOF小菜鸟； 期待能与更多的金融自媒体和IP建立联系 具体内容说明,请查看jobhub文档； gamehub 一个业内朋友一起打游戏的板块； 具体内容说明,请查看gamehub文档； lovehub 一个征婚交友的地方； 具体内容说明,请查看lovehub文档； plutus（核心） plutus是另外一个小伙伴给起的名字，翻译为财神爷，哈哈，是不是凭这个就该关注下了呢 后台框架,该项目核心,分为以下模块和文件: ├─data │ │ data_base.py │ │ __init__.py │ │ │ ├─data_backup │ │ backup_data.py │ │ __init__.py │ │ │ ├─data_download │ │ download_base.py │ │ download_from_bs.py │ │ download_from_ctp.py │ │ download_from_sge.py │ │ __init__.py │ │ │ ├─data_prepare │ │ prepare_base.py │ │ prepare_center_data.py │ │ prepare_his_parquet.py │ │ prepare_rt_redis.py │ │ __init__.py │ │ │ ├─data_pretreat │ │ pretreat_base.py │ │ pretreat_from_bs.py │ │ pretreat_from_diy.py │ │ __init__.py │ │ │ ├─data_process │ │ process_base.py │ │ process_cn_future_index.py │ │ process_cn_future_md.py │ │ process_cn_future_master.py │ │ process_cn_future_trade.py │ │ process_cn_stock_master.py │ │ process_cn_stock_trade.py │ │ process_sg_future_md.py │ │ __init__.py │ │ │ ├─data_sync │ │ __init__.py │ │ sync_base.py │ │ sync_data.py │ │ │ ├─data_update │ │ update_base.py │ │ update_data.py │ │ __init__.py │ │ │ └─data_wrangle │ resample_data.py │ standard_data.py │ __init__.py │ ├─execution │ cal_factor.bat │ cal_signal.bat │ run_prepare_data.bat │ run_update_data.bat │ ├─factor │ │ factor_base.py │ │ __init__.py │ │ │ ├─factor_calculate │ │ cal_cn_future.py │ │ cal_cn_future_ts_1d.py │ │ cal_factor_base.py │ │ __init__.py │ │ │ ├─factor_define │ │ cn_future_cs_1d_mom.py │ │ cn_future_ts_1d_mom.py │ │ __init__.py │ │ │ ├─factor_operator │ │ cs_operator.py │ │ ts_operator.py │ │ __init__.py │ │ │ └─factor_process │ __init__.py │ ├─position │ │ position_base.py │ │ __init__.py │ │ │ ├─position_calculate │ │ cal_cn_future.py │ │ cal_position_base.py │ │ __init__.py │ │ │ └─position_process │ process_position.py │ __init__.py │ ├─research │ │ __init__.py │ │ │ ├─backtest │ │ │ backtest.py │ │ │ statistics.py │ │ │ __init__.py │ │ │ ├─models │ │ predict_model.py │ │ train_model.py │ │ __init__.py │ ├─signal │ │ signal_base.py │ │ __init__.py │ │ │ ├─signal_calculate │ │ cal_cn_future.py │ │ cal_signal_base.py │ │ __init__.py │ │ │ ├─signal_portfolio │ │ cal_portfolio_weight.py │ │ __init__.py │ │ │ └─signal_process │ process_signal.py │ __init__.py │ ├─trader │ __init__.py │ ├─utils │ │ __init__.py │ │ │ ├─database │ │ ck_control.py │ │ dk_control.py │ │ __init__.py │ │ │ ├─exception │ │ error.py │ │ __init__.py │ │ │ ├─tool │ │ add_sys_path.py │ │ configer.py │ │ datetime_wrangle.py │ │ decorator.py │ │ email.py │ │ freeze_requirement.py │ │ logger.py │ │ requirements.txt │ │ __init__.py │ │ │ ├─visualization │ │ │ plot.py 🚀 使用说明 第一步：克隆仓库 确保服务器安装了 Git,否则需要先 安装 git 命令安装软件： git clone https://github.com/jiangtiantu/quanthub.git 如果因为网络问题无法连接,可以使用国内镜像仓库,但是镜像仓库会有 30 分钟的延迟： git clone https://gitee.com/jiangtiantu/quanthub.git 或者直接点击项目右上角下载； 第二步：构建你的想法 根据你的经验,你的猜测,提出一个可能的投研思路,一个研究和交易的方向。 如果你没有任何想法,可以先看看paperhub中的资料,找找灵感 第三步：获取数据 查看datahub面板数据,根据你的思路,选取你需要的数据。 第四步：打开投研DEMO,享受你的量化之旅 在researhub里有为你准备好的大量投研demo,请查看reasearhub 第五步：将数据转化为因子 正常情况下,先做单因子分析 如果已经有很成熟的因子库了,走factor,signal 批量生成和转化,将数据存放到factorhub,signalhub 第六步：将因子转化为实际交易的仓位 这里会涉及到因子组合和信号组合两个问题,确定自己需要怎样的组合方式,将结果输出到positionhub 第七步：选择喜欢的合适的交易框架 看看tradehub 中有没有你喜欢的交易框架,尽量少造轮子呀 当然,非常欢迎大佬提交自己的框架,多多宜善 第八步：评估分析,优化提高 一个循环... 📝 升级打怪之路 ok,走过了上面的流程,你已经掌握了量化投资的基本套路了。 接下来,或自己,或和小伙伴,开启新的升级打怪之路了!!!! 这个行业真的是太jer卷了,例如期货市场,本质上就是一个零和博弈的市场。 在这个赌场里,如果你不能跟随市场成长和进化,那么你就是那只被抓的🐟🐋🐳🐬； 如果你不知道怎么避免成为一个韭菜,那么你就是那个韭菜！ 所以,做好一直卷下去的准备吧； 如果你准备好了,那就去尝试吧,每次失败的经验,都将帮助你逼近那些正确的方向！ 但一定一定,切记,投资有风险,入市需谨慎；活下来,比什么都重要！ # 生活不易,猫猫叹气,加油(ง •_•)ง！ 🤝 参与共建 要做的东西太多了,本项目应该会处于长期快速迭代更新； 我们欢迎所有的贡献者,也期待能结识更多金融圈开源小伙伴,你可以将任何想法作为 pull requests 或 GitHub issues 提交。关于代码如果有任何疑惑的地方,可以先看下,name_rule是否能解决问题。顺颂商祺 :) powered by Gitbook修订时间： 2022-07-10 13:50:32 "
+    },
+    "doc/project_doc/quanthub.html": {
+        "url": "doc/project_doc/quanthub.html",
+        "title": "quanthub简介",
+        "keywords": "",
+        "body": "quanthub简介 powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/name_rule.html": {
+        "url": "doc/project_doc/name_rule.html",
+        "title": "name_rule",
+        "keywords": "",
+        "body": "代码规范 代码用black格式化 代码模块化,少造轮子 注释用 :param 字符串拼接用f\"{xxx}\" 函数尽量写成传参数的方式 命名规范 ETL流程规则： download* 对应raw_data,只改trading_date(若有)这一个字段,其他不做任何数据上的调整。以文件的形式存储到本地磁盘; pretreat* 修改数据类型,字段重命名,添加新字段,存储到clickhouse process* 根据现在的数据表产生新的数据,比如指数数据,存储到clickhouse commercial* 对数据进行选择,是最终数据的集合,存储到clickhouse get:获取一个数据,放在内存中; save:从内存中,把处理过的数据,保存到本地; import: 指第一次把数据导入数据库; export: 把数据从数据库中导出为文件 命名大小写规则: 特定字段,symbol,method大写; 常量大写 数据源全为小写 类,用大驼峰命名法,每个单词首字母大写; 其他函数或者变量,用下划线命名法,必须小写; comercial数据库,字段名全为小写 命名缩写规则： 自己做的数据叫做diy,其他的数据源为缩写 sh 表示上海交易所,sz 表示深圳交易所 数据字段尽量不要出现缩写 时间表达方式如下: 1y,1m,1d,1h,1m,1s 所有命名单词用下划线隔开,都是单数形式,尽量全拼,不要缩写 复杂变量名,用其数据类型作结尾,比如: trading_date_info_s 特殊命名规则： path 表示文件路径,dir表示文件夹路径; database代表mongo,clickhouse,mysql等等数据库;db代表具体的数据库名称 tb:table db: database dt: date dtt: datetime rt：realtime his：history cal:calculate hs300:hs300指数 code,如510300,trade_code:如510300.sh 所有字段名字统一,具有特定的意思,比如symbol /contract,默认所有的contract为symbol+4位数字；code/trade_code 数据存储类型规则： trading_date 是date32 和datetime,trading_time 数据类型都是datetime64 在把数据写到raw_data 里面时,原有的date,day 等表示日期的字段不动,数据类型也不动。自行添加trading_date/trading_time字段 默认所有从数据库取出的所有数据都是DataFrame,不做sort操作 powered by Gitbook修订时间： 2022-07-10 15:26:44 "
+    },
+    "doc/project_doc/datahub.html": {
+        "url": "doc/project_doc/datahub.html",
+        "title": "datahub",
+        "keywords": "",
+        "body": "datahub 简介 datahub 是一个基于 Python 的金融数据工具包。提供落地历史数据库和实时数据。 目前数据的获取有两种方案： 直接通过网盘下载,数据放在datahub目录中，适合只是做点尝试和测试的同学 通过 Rsync 从远程服务器拉取数据,定时同步数据(只面向参与项目共建的小伙伴和付费用户) 研究数据下载地址： 链接: https://pan.baidu.com/s/1nCZIXFtG7Hoe7OvXs1uknA?pwd=n2ru 提取码: n2ru 数据存储格式为parquet，使用方式请查看pyarrow 或者 researchub 中的案例。 实时交易数据： 如有需求，请小窗联系，email:qiwu12@qq.com datahub 提供的每日更新的数据包括： 期货数据 国家和地区 市场 分类 表名 释义 更新频率 cn future master trading_date_info 国内期货交易日信息 每天下午6点更新上一交易日数据 cn future master symbol_info 国内期货交易品种信息 每天下午6点更新上一交易日数据 cn future master contract_info 国内期货合约信息 每天下午6点更新上一交易日数据 cn future md main_roll_calendar 国内期货主力合约日历 每天下午6点更新上一交易日数据 cn future md all_1d 国内期货日行情 每天下午6点更新上一交易日数据 cn future md all_1m 国内期货分钟行情 每天下午6点更新上一交易日数据 cn future md main_1m 国内期货主力合约分钟行情 每天下午6点更新上一交易日数据 cn future md main_1d 国内期货主力合约日行情 每天下午6点更新上一交易日数据 股票数据 国家和地区 市场 分类 表名 释义 更新频率 cn stock master code_info 国内股票基础证券信息 每天下午6点更新上一交易日数据 cn stock master share_holder_info 国内股票股东信息 每天下午6点更新上一交易日数据 cn stock master share_capital_info 国内股票股本信息 每天下午6点更新上一交易日数据 cn stock master allotment_info 国内股票分红信息 每天下午6点更新上一交易日数据 cn stock master industry_info 国内股票行业分类信息 每天下午6点更新上一交易日数据 cn stock md all_1d 国内股票日行情信息 每天下午6点更新上一交易日数据 cn stock md adjust_factor 国内股票复权因子信息 每天下午6点更新上一交易日数据 cn stock md all_1m 国内股票分钟行情信息 每天下午6点更新上一交易日数据 cn stock index weight_info 国内股票指数权重信息 每天下午6点更新上一交易日数据 cn stock trade margin_info 国内股票融资融券信息 每天下午6点更新上一交易日数据 cn stock trade stock_connect_hold_info 国内股票北向资金持仓信息 每天下午6点更新上一交易日数据 cn stock trade stock_connect_balance_info 国内股票北向资金余额信息 每天下午6点更新上一交易日数据 powered by Gitbook修订时间： 2022-07-10 18:14:53 "
+    },
+    "doc/data_doc/cn/future/master/trading_date_info.html": {
+        "url": "doc/data_doc/cn/future/master/trading_date_info.html",
+        "title": "master/trading_date_info",
+        "keywords": "",
+        "body": "trading_date_info name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 示例数据 trading_date 0 2009-01-05 1 2009-01-06 2 2009-01-07 3 2009-01-08 4 2009-01-09 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/master/contract_info.html": {
+        "url": "doc/data_doc/cn/future/master/contract_info.html",
+        "title": "master/contract_info",
+        "keywords": "",
+        "body": "contract_info name pandas_type numpy_type 释义 0 contract unicode object 合约名称 1 symbol unicode object 交易品种 2 exchange unicode object 交易所代码 3 multiplier float64 float64 合约乘数 4 listing_date datetime datetime64[ns] 上市日期 5 delisting_date datetime datetime64[ns] 退市日期 6 last_tradable_date datetime datetime64[ns] 最后可交易日 7 int64 int64 nan 示例数据 contract symbol exchange multiplier listing_date delisting_date last_tradable_date 0 A0303 A DCE 10 2002-03-15 2003-03-14 2003-02-27 1 A0305 A DCE 10 2002-03-15 2003-05-23 2003-04-29 2 A0307 A DCE 10 2002-03-15 2003-07-14 2003-06-27 3 A0309 A DCE 10 2002-05-22 2003-09-12 2003-08-28 4 A0311 A DCE 10 2002-05-22 2003-11-14 2003-10-30 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/master/symbol_info.html": {
+        "url": "doc/data_doc/cn/future/master/symbol_info.html",
+        "title": "master/symbol_info",
+        "keywords": "",
+        "body": "symbol_info name pandas_type numpy_type 释义 0 symbol unicode object 交易品种 1 price_tick float64 float64 最小价格变动单位 2 multiplier float64 float64 合约乘数 3 exchange_tq unicode object 交易所合约代码(天勤) 4 exchange_wind unicode object 交易所合约代码(wind) 5 index_code_wind unicode object nan 6 dominant_code_wind unicode object nan 7 exchange_ctp unicode object 交易所合约代码(ctp) 8 day_before_expiry int64 int64 到期日-普通交易者最后可持有日期 示例数据 symbol price_tick multiplier exchange_tq exchange_wind index_code_wind dominant_code_wind exchange_ctp day_before_expiry 0 A 1 10 DCE DCE AFI.WI A.DCE DCE 21 1 AG 1 15 SHFE SHF AGFI.WI AG.SHF SHFE 15 2 AL 5 5 SHFE SHF ALFI.WI AL.SHF SHFE 15 3 AP 1 10 CZCE CZC APLFI.WI AP.CZC CZCE 21 4 AU 0.02 1000 SHFE SHF AUFI.WI AU.SHF SHFE 15 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/md/main_roll_calendar.html": {
+        "url": "doc/data_doc/cn/future/md/main_roll_calendar.html",
+        "title": "md/main_roll_calendar",
+        "keywords": "",
+        "body": "main_roll_calendar name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 symbol unicode object 交易品种 2 o_m unicode object 当日主力合约,按照持仓量最大选择,单调,切换主力合约后,不再考虑旧主力合约 3 o_nm unicode object 当日主力合约,按照持仓量最大选择,非单调,切换主力合约后,仍然考虑旧主力合约 4 v_m unicode object 当日主力合约,按照成交量最大选择,单调,切换主力合约后,不再考虑旧主力合约 5 v_nm unicode object 当日主力合约,按照成交量最大选择,非单调,切换主力合约后,仍然考虑旧主力合约 6 int64 int64 nan 示例数据 trading_date symbol o_m o_nm v_m v_nm 15284 2022-06-01 A A2207 A2207 A2207 A2207 15285 2022-06-01 AG AG2212 AG2212 AG2212 AG2212 15286 2022-06-01 AL AL2209 AL2207 AL2209 AL2207 15287 2022-06-01 AP AP2210 AP2210 AP2210 AP2210 15288 2022-06-01 AU AU2212 AU2212 AU2212 AU2212 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/md/all_1d.html": {
+        "url": "doc/data_doc/cn/future/md/all_1d.html",
+        "title": "md/all_1d",
+        "keywords": "",
+        "body": "all_1d name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 contract unicode object 合约名称 2 symbol unicode object 交易品种 3 open float64 float64 开盘价 4 close float64 float64 收盘价 5 high float64 float64 最高价 6 low float64 float64 最低价 7 settlement float64 float64 结算价 8 pre_settlement float64 float64 昨日结算价 9 up_limit float64 float64 涨停价 10 down_limit float64 float64 跌停价 11 open_interest float64 float64 持仓量 12 volume float64 float64 成交量 13 turnover float64 float64 成交额 14 pre_close float64 float64 昨日收盘价 15 int64 int64 nan 示例数据 trading_date contract symbol open close high low settlement pre_settlement up_limit down_limit open_interest volume turnover pre_close 22603 2022-06-01 A2207 A 6290 6278 6313 6255 6285 6291 6794 5788 103170 68484 4.30444e+09 6295 22774 2022-06-01 A2209 A 6275 6194 6285 6190 6242 6261 6761 5761 59405 24745 1.54476e+09 6270 22909 2022-06-01 A2211 A 6072 5999 6082 5995 6041 6075 6561 5589 29806 11666 7.04782e+08 6074 22999 2022-06-01 A2301 A 6043 5975 6048 5975 6012 6051 6535 5567 4867 509 3.06051e+07 6043 23054 2022-06-01 A2303 A 5981 5952 5990 5952 5969 6020 6501 5539 111 56 3.34276e+06 6020 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/md/all_1m.html": {
+        "url": "doc/data_doc/cn/future/md/all_1m.html",
+        "title": "md/all_1m",
+        "keywords": "",
+        "body": "all_1m name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 trading_time datetime datetime64[ns] 交易时间 2 contract unicode object 合约名称 3 symbol unicode object 交易品种 4 open float64 float64 开盘价 5 close float64 float64 收盘价 6 high float64 float64 最高价 7 low float64 float64 最低价 8 open_interest float64 float64 持仓量 9 volume float64 float64 成交量 10 turnover float64 float64 成交额 11 int64 int64 nan 示例数据 trading_date trading_time contract symbol open close high low open_interest volume turnover 39540 2022-06-01 00:00:00 2022-05-31 21:01:00 FU2302 FU 4054 4054 4054 4054 16708 650 2.6351e+07 39541 2022-06-01 00:00:00 2022-05-31 21:02:00 FU2302 FU 4054 4054 4054 4054 16708 0 0 39542 2022-06-01 00:00:00 2022-05-31 21:03:00 FU2302 FU 4054 4054 4054 4054 16708 0 0 39543 2022-06-01 00:00:00 2022-05-31 21:04:00 FU2302 FU 4054 4054 4054 4054 16708 0 0 39544 2022-06-01 00:00:00 2022-05-31 21:05:00 FU2302 FU 4054 4054 4054 4054 16708 0 0 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/future/md/main_1d.html": {
+        "url": "doc/data_doc/cn/future/md/main_1d.html",
+        "title": "md/main_1d",
+        "keywords": "",
+        "body": "main_1d name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 contract unicode object 合约名称 2 symbol unicode object 交易品种 3 open float64 float64 开盘价 4 close float64 float64 收盘价 5 high float64 float64 最高价 6 low float64 float64 最低价 7 settlement float64 float64 结算价 8 pre_settlement float64 float64 昨日结算价 9 up_limit float64 float64 涨停价 10 down_limit float64 float64 跌停价 11 open_interest float64 float64 持仓量 12 volume float64 float64 成交量 13 turnover float64 float64 成交额 14 pre_close float64 float64 昨日收盘价 15 int64 int64 nan 示例数据 trading_date contract symbol open close high low settlement pre_settlement up_limit down_limit open_interest volume turnover pre_close 62236 2022-06-01 A2207 A 6290 6278 6313 6255 6285 6291 6794 5788 103170 68484 4.30444e+09 6295 62237 2022-06-01 AG2212 AG 4695 4673 4727 4657 4689 4722 5194 4249 440890 336900 2.37006e+10 4716 62238 2022-06-01 AL2207 AL 20650 20280 20695 20030 20320 20775 22850 18695 186703 378926 3.84989e+10 20795 62239 2022-06-01 AP2210 AP 8816 8806 8945 8792 8876 8818 9612 8024 149846 183907 1.63236e+10 8853 62240 2022-06-01 AU2212 AU 399.6 397.46 400.68 396.76 398.34 400.2 432.2 368.18 93080 39983 1.59271e+10 400.26 powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/future/md/main_1m.html": {
+        "url": "doc/data_doc/cn/future/md/main_1m.html",
+        "title": "md/main_1m",
+        "keywords": "",
+        "body": "main_1m name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 contract unicode object 合约名称 2 trading_time datetime datetime64[ns] 交易时间 3 symbol unicode object 交易品种 4 open float64 float64 开盘价 5 close float64 float64 收盘价 6 high float64 float64 最高价 7 low float64 float64 最低价 8 open_interest float64 float64 持仓量 9 volume float64 float64 成交量 10 turnover float64 float64 成交额 11 int64 int64 nan 示例数据 trading_date contract trading_time symbol open close high low open_interest volume turnover 20437661 2022-06-01 00:00:00 A2207 2022-05-31 21:01:00 A 6290 6293 6303 6287 108033 3609 2.27133e+08 20437662 2022-06-01 00:00:00 A2207 2022-05-31 21:02:00 A 6292 6278 6292 6275 107714 1131 7.10524e+07 20437663 2022-06-01 00:00:00 A2207 2022-05-31 21:03:00 A 6278 6281 6284 6277 107572 824 5.17481e+07 20437664 2022-06-01 00:00:00 A2207 2022-05-31 21:04:00 A 6281 6285 6288 6279 107462 683 4.29142e+07 20437665 2022-06-01 00:00:00 A2207 2022-05-31 21:05:00 A 6285 6284 6287 6281 107324 438 2.7525e+07 powered by Gitbook修订时间： 2022-07-10 16:38:54 "
+    },
+    "doc/data_doc/cn/stock/master/code_info.html": {
+        "url": "doc/data_doc/cn/stock/master/code_info.html",
+        "title": "master/code_info",
+        "keywords": "",
+        "body": "code_info name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 code unicode object 证券代码 2 name unicode object 名称 3 issue_price float64 float64 发行价 4 board_type unicode object 板块类别，'MainBoard'-主板,'GEM'-创业板,'SME'-中小企业板,'KSH'-科创板 5 listing_date unicode object 上市日期 6 delisting_date unicode object 退市日期 7 int64 int64 nan 示例数据 trading_date code name issue_price board_type listing_date delisting_date 9167596 2022-06-01 000001 平安银行 40 MainBoard 1991-04-03 0000-00-00 9167597 2022-06-01 000002 万科A 1 MainBoard 1991-01-29 0000-00-00 9167598 2022-06-01 000004 ST国华 1 MainBoard 1990-12-01 0000-00-00 9167599 2022-06-01 000005 ST星源 10 MainBoard 1990-12-10 0000-00-00 9167600 2022-06-01 000006 深振业A 10 MainBoard 1992-04-27 0000-00-00 powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/master/share_holder_info.html": {
+        "url": "doc/data_doc/cn/stock/master/share_holder_info.html",
+        "title": "master/share_holder_info",
+        "keywords": "",
+        "body": "share_holder_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 info_date datetime datetime64[ns] 公告日期 2 end_date datetime datetime64[ns] 结束日期 3 rank int64 int64 排名 4 shareholder_name unicode object 股东名称 5 shareholder_attr unicode object 股东属性 6 shareholder_kind unicode object 股东性质 7 shareholder_type empty object 股东类别 8 hold_percent_total float64 float64 占股比例(%)当fields='total'时，持股数(股)/总股本*100 9 hold_percent_float float64 float64 占流通A股比例(%),无限售流通A股/已上市流通A股(不含高管股)*100 10 share_pledge float64 float64 股权质押涉及股数(股) 11 share_freeze float64 float64 股权冻结涉及股数(股) 12 int64 int64 nan 示例数据 code info_date end_date rank shareholder_name shareholder_attr shareholder_kind shareholder_type hold_percent_total hold_percent_float share_pledge share_freeze 1538811 605090 2022-06-01 2022-05-24 1 中国农业银行股份有限公司-中邮核心优势灵活配置混合型证券投资基金 证券品种 开放式投资基金 None 0.497732 2.65735 nan nan 1538812 605090 2022-06-01 2022-05-24 2 中国工商银行股份有限公司-汇添富碳中和主题混合型证券投资基金 证券品种 开放式投资基金 None 0.141364 0.754732 nan nan 1538813 605090 2022-06-01 2022-05-24 3 张林 自然人 自然人 None 0.129219 0.689889 nan nan 1538814 605090 2022-06-01 2022-05-24 4 中国建设银行股份有限公司-华夏盛世精选混合型证券投资基金 证券品种 开放式投资基金 None 0.112874 0.602628 nan nan 1538815 605090 2022-06-01 2022-05-24 5 顾电阳 自然人 自然人 None 0.102656 0.548072 nan nan powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/master/share_capital_info.html": {
+        "url": "doc/data_doc/cn/stock/master/share_capital_info.html",
+        "title": "master/share_capital_info",
+        "keywords": "",
+        "body": "share_capital_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 trading_date datetime datetime64[ns] 交易日期 2 circulation_a float64 float64 流通A股 3 non_circulation_a float64 float64 非流通A股合计 4 total_a float64 float64 A股总股本 5 total float64 float64 总股本 6 int64 int64 nan 示例数据 code trading_date circulation_a non_circulation_a total_a total 3013 000001 2022-06-01 1.94055e+10 396248 1.94059e+10 1.94059e+10 6044 000002 2022-06-01 9.71755e+09 6.64327e+06 9.7242e+09 1.16254e+10 9075 000003 2022-06-01 1.91809e+08 6.73879e+07 2.59197e+08 3.33434e+08 12106 000004 2022-06-01 1.16331e+08 3.96723e+07 1.56003e+08 1.56003e+08 15137 000005 2022-06-01 1.05795e+09 590600 1.05854e+09 1.05854e+09 powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/master/allotment_info.html": {
+        "url": "doc/data_doc/cn/stock/master/allotment_info.html",
+        "title": "master/allotment_info",
+        "keywords": "",
+        "body": "allotment_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 declaration_announcement_date datetime datetime64[ns] 首次信息发布日期 2 proportion float64 float64 计划配股比例 3 allotted_proportion empty object 实际配股比例 4 allotted_shares empty object 实际配股数量(股) 5 allotment_price empty object 每股配股价格(元) 6 book_closure_date empty object 股权登记日 7 ex_right_date empty object 除权除息日 示例数据 code declaration_announcement_date proportion allotted_proportion allotted_shares allotment_price book_closure_date ex_right_date 0 600081 2022-06-29 0.3 None None None None None powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/master/industry_info.html": {
+        "url": "doc/data_doc/cn/stock/master/industry_info.html",
+        "title": "master/industry_info",
+        "keywords": "",
+        "body": "industry_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 first_industry_name unicode object 一级行业分类名称 2 second_industry_name unicode object 二级行业分类名称 3 third_industry_name unicode object 三级行业分类名称 示例数据 code first_industry_name second_industry_name third_industry_name 0 000001 银行 全国性股份制银行Ⅱ 全国性股份制银行Ⅲ 1 000002 房地产 房地产开发和运营 住宅物业开发 2 000004 医药 化学制药 化学制剂 3 000005 电力及公用事业 环保及公用事业 环保及水务 4 000006 房地产 房地产开发和运营 住宅物业开发 powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/md/all_1d.html": {
+        "url": "doc/data_doc/cn/stock/md/all_1d.html",
+        "title": "md/all_1d",
+        "keywords": "",
+        "body": "all_1d name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 code unicode object 证券代码 2 turnover float64 float64 成交额 3 down_limit float64 float64 跌停价 4 trade_num float64 float64 交易次数 5 low float64 float64 最低价 6 high float64 float64 最高价 7 open float64 float64 开盘价 8 up_limit float64 float64 涨停价 9 volume float64 float64 成交量 10 close float64 float64 收盘价 11 pre_close float64 float64 昨日收盘价 12 int64 int64 nan 示例数据 trading_date code turnover down_limit trade_num low high open up_limit volume close pre_close 3013 2022-06-01 000001 1.18742e+09 12.74 59344 14 14.14 14.14 15.58 8.45299e+07 14.08 14.16 6030 2022-06-01 000002 1.44556e+09 16.03 65222 17.74 18.12 17.84 19.59 8.06848e+07 17.88 17.81 9047 2022-06-01 000004 2.40358e+07 9.18 1683 9.56 9.7 9.6 10.14 2.49663e+06 9.65 9.66 12064 2022-06-01 000005 1.06444e+07 1.8 818 1.86 1.91 1.88 1.98 5.6483e+06 1.87 1.89 15081 2022-06-01 000006 2.2337e+08 3.98 32696 4.33 4.66 4.37 4.86 4.96703e+07 4.54 4.42 powered by Gitbook修订时间： 2022-07-10 16:38:55 "
+    },
+    "doc/data_doc/cn/stock/md/all_1m.html": {
+        "url": "doc/data_doc/cn/stock/md/all_1m.html",
+        "title": "md/all_1m",
+        "keywords": "",
+        "body": "all_1m name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 trading_time datetime datetime64[ns] 交易时间 2 code unicode object 证券代码 3 turnover float64 float64 成交额 4 trade_num float64 float64 交易次数 5 low float64 float64 最低价 6 high float64 float64 最高价 7 open float64 float64 开盘价 8 volume float64 float64 成交量 9 close float64 float64 收盘价 10 int64 int64 nan 示例数据 trading_date trading_time code turnover trade_num low high open volume close 240 2022-06-29 00:00:00 2022-06-29 09:31:00 000001 5.25423e+07 2048 14.63 14.72 14.65 3.58268e+06 14.71 241 2022-06-29 00:00:00 2022-06-29 09:32:00 000001 2.51271e+07 1212 14.68 14.75 14.72 1.7065e+06 14.7 242 2022-06-29 00:00:00 2022-06-29 09:33:00 000001 1.65651e+07 792 14.69 14.71 14.69 1.1271e+06 14.7 243 2022-06-29 00:00:00 2022-06-29 09:34:00 000001 1.66085e+07 850 14.69 14.74 14.69 1.1284e+06 14.73 244 2022-06-29 00:00:00 2022-06-29 09:35:00 000001 8.72025e+06 627 14.71 14.74 14.73 592200 14.71 powered by Gitbook修订时间： 2022-07-10 16:38:56 "
+    },
+    "doc/data_doc/cn/stock/md/adjust_factor.html": {
+        "url": "doc/data_doc/cn/stock/md/adjust_factor.html",
+        "title": "md/adjust_factor",
+        "keywords": "",
+        "body": "adjust_factor name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 code unicode object 证券代码 2 hfq_factor float64 float64 后复权因子 示例数据 trading_date code hfq_factor 0 2010-01-15 600495 1.40086 1 2010-01-18 600495 1.40086 2 2010-01-19 600495 1.40086 3 2010-01-20 600495 1.40086 4 2010-01-21 600495 1.40086 powered by Gitbook修订时间： 2022-07-10 16:38:56 "
+    },
+    "doc/data_doc/cn/stock/index/weight_info.html": {
+        "url": "doc/data_doc/cn/stock/index/weight_info.html",
+        "title": "index/weight_info",
+        "keywords": "",
+        "body": "weight_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 weight_value float64 float64 权重值 2 trading_date datetime datetime64[ns] 交易日期 3 int64 int64 nan 示例数据 code weight_value trading_date 150700 600000 0.01351 2022-06-01 150701 600028 0.00865 2022-06-01 150702 600030 0.0281 2022-06-01 150703 600031 0.0146 2022-06-01 150704 600036 0.0712 2022-06-01 powered by Gitbook修订时间： 2022-07-10 16:38:56 "
+    },
+    "doc/data_doc/cn/stock/trade/margin_info.html": {
+        "url": "doc/data_doc/cn/stock/trade/margin_info.html",
+        "title": "trade/margin_info",
+        "keywords": "",
+        "body": "margin_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 trading_date datetime datetime64[ns] 交易日期 2 margin_balance int64 int64 融资余额 3 buy_on_margin_value int64 int64 融资买入额 4 short_sell_quantity int64 int64 融券余量 5 margin_repayment float64 float64 融资偿还额 6 short_balance_quantity int64 int64 融券余量 7 short_repayment_quantity float64 float64 融券偿还量 8 short_balance float64 float64 融券余额 9 total_balance float64 float64 融资融券余额 10 int64 int64 nan 示例数据 code trading_date margin_balance buy_on_margin_value short_sell_quantity margin_repayment short_balance_quantity short_repayment_quantity short_balance total_balance 2956 000001 2022-06-01 3946277760 125686147 393600 9.33743e+07 14830709 182600 2.08816e+08 4.15509e+09 5914 000002 2022-06-01 4692882274 105554343 458800 1.13556e+08 9536402 602203 1.70511e+08 4.86339e+09 8182 000006 2022-06-01 399300756 40245137 39400 3.87926e+07 116600 35100 529364 3.9983e+08 9066 000008 2022-06-01 275824636 65369028 0 7.84355e+07 192000 300 512640 2.76337e+08 11616 000009 2022-06-01 1940339971 303701902 1117014 1.0957e+08 4635980 1.55181e+06 5.79498e+07 1.99829e+09 powered by Gitbook修订时间： 2022-07-10 16:38:56 "
+    },
+    "doc/data_doc/cn/stock/trade/stock_connect_hold_info.html": {
+        "url": "doc/data_doc/cn/stock/trade/stock_connect_hold_info.html",
+        "title": "trade/stock_connect_hold_info",
+        "keywords": "",
+        "body": "stock_connect_hold_info name pandas_type numpy_type 释义 0 code unicode object 证券代码 1 trading_date datetime datetime64[ns] 交易日期 2 shares_holding float64 float64 持股量 3 holding_ratio float64 float64 持股比例 4 adjusted_holding_ratio float64 float64 调整后持股比例 5 int64 int64 nan 示例数据 code trading_date shares_holding holding_ratio adjusted_holding_ratio 1637 000001 2022-06-01 1.70297e+09 8.77 8.7757 3294 000002 2022-06-01 4.16618e+08 4.28 4.2873 4951 000005 2022-06-01 2010 0 0.0002 6608 000006 2022-06-01 4.74077e+06 0.35 0.3512 8240 000008 2022-06-01 4.07149e+07 1.46 1.5114 powered by Gitbook修订时间： 2022-07-10 16:41:39 "
+    },
+    "doc/data_doc/cn/stock/trade/stock_connect_balance_info.html": {
+        "url": "doc/data_doc/cn/stock/trade/stock_connect_balance_info.html",
+        "title": "trade/stock_connect_balance_info",
+        "keywords": "",
+        "body": "stock_connect_balance_info name pandas_type numpy_type 释义 0 trading_date datetime datetime64[ns] 交易日期 1 connect unicode object 默认返回全部connect1、输入输入'hk_to_sh'返回沪股通的额度信息。2、输入'hk_to_sz'返回深股通的额度信息。3、输入'sh_to_hk'返回港股通(上海)的额度信息。4、输入'sz_to_hk'返回港股通(深圳)的额度信息 2 quota_balance_ratio float64 float64 nan 3 quota_balance float64 float64 占比 4 buy_turnover float64 float64 买方金额 5 sell_turnover float64 float64 卖方金额 6 int64 int64 nan 示例数据 trading_date connect quota_balance_ratio quota_balance buy_turnover sell_turnover 6089 2022-06-01 hk_to_sh 0.96 5.0245e+10 2.037e+10 2.0058e+10 6090 2022-06-01 hk_to_sz 0.94 4.9066e+10 2.446e+10 2.3526e+10 6091 2022-06-01 sh_to_hk 0.989542 4.15608e+10 5.545e+09 5.876e+09 6092 2022-06-01 sz_to_hk 0.9565 4.0173e+10 5.876e+09 4.472e+09 powered by Gitbook修订时间： 2022-07-10 16:38:56 "
+    },
+    "doc/project_doc/paperhub.html": {
+        "url": "doc/project_doc/paperhub.html",
+        "title": "paperhub",
+        "keywords": "",
+        "body": "paperhub 一个放资料的地方,包含各类视频和各种PDF等等文件,几乎你能在互联网上找到的所有可能有点用的学习资料 资料总大小大概200g 左右,分类如下： PDF各类文档： 股票 基金 期货 期权 高频 债券 资产配置 下载地址：https://www.aliyundrive.com/s/9FaFAbS5SEA 提取码: qu20 视频等学习资料： blablabla 如需要更多内容,请小窗联系 powered by Gitbook修订时间： 2022-07-10 14:17:37 "
+    },
+    "doc/project_doc/researchub.html": {
+        "url": "doc/project_doc/researchub.html",
+        "title": "researchub",
+        "keywords": "",
+        "body": "researchub 这是一个投研平台,本质是jupyter lab； 我对该模块的定义是存放,我们数据分析的各类notebook文件,以及各种测试代码,相关回测逻辑,请阅读plutus.research模块； 目前有如下demo: ├─0 Build Ideas │ quantization.emmx │ ├─1 Data │ ├─data_collection │ │ export_data_from_clickhouse_to_arrow.ipynb │ │ export_data_from_clickhouse_to_parquet.ipynb │ │ export_data_from_clickhouse_to_parquet_by_sql.ipynb │ │ import_data_from_parquet_to_clickhouse.ipynb │ │ │ └─data_wrangling │ │ alter_raw_data_clickhouse.ipynb │ │ commercial_data_to_clickhouse.ipynb │ │ download_data_to_parquet.ipynb │ │ drop_duplicate_data_clickhouse.ipynb │ │ pretreat_data_to_clickhouse.ipynb │ │ proccess_data_to_clickhouse.ipynb ├─3 Research │ ├─cross_section_factor_analysis │ │ cs_factor_analysis_demo.ipynb │ │ ├─investment_portfolio │ │ factor_portfolio_analysis.ipynb │ │ investment_portfolio_analysis.ipynb │ │ signal_portfolio_analysis.ipynb │ │ │ └─time_series_factor_analysis │ example.ipynb │ ts_factor_daily_demo. │ ts_factor_min_demo.ipynb │ └─5 Trader and Oversight ​ 单因子分析流程（供参考） 引入相应模块 # coding: utf-8 import pandas as pd import numpy as np from plutus.research.backtest.backtest import BacktestCS from plutus.utils.visualization.plot import PlotCS np.set_printoptions(suppress=True) pd.set_option('display.float_format', lambda x: '%.5f' % x) 读取数据 datapath='../../../datahub/raw/cn/stock/md/all_1d.parquet' data_bfq=pd.read_parquet(datapath) 对数据进行基本的处理 open_ = data_bfq[\"open\"].unstack() close = data_bfq[\"close\"].unstack() high = data_bfq[\"high\"].unstack() low = data_bfq[\"low\"].unstack() vol = data_bfq[\"volume\"].unstack() amount = data_bfq[\"turnover\"].unstack() #去除涨跌停,去除停牌股 # tradeable=data_bfq['amount'].apply(lambda x :1 if x>0 else np.nan)*(data_bfq['high']-data_bfq['low']).apply(lambda x :1 if x!=0 else np.nan)*chg_1_d.stack().apply(lambda x :1 if x 定义一个因子 def factor_simple(): factor=-1*Close.pct_change(5) return factor test_factor=factor_simple() 计算factor_rank backtest_cs= BacktestCS() clean_factor_data= backtest_cs.cal_factor_rank(merge_data,test_factor) 计算fator_quantile clean_factor_data= backtest_cs.cal_factor_quantile(clean_factor_data,group_num=20) 选择自己需要的hold_portfolio long_portfolio_data, short_portfolio_data =backtest_cs.cal_hold_portfolio(clean_factor_data, hold_num= 1) 计算标的权重,可以自己拟定 portfolio_data = backtest_cs.cal_portfolio_weight(long_portfolio_data) 计算回测指标 ret_df, sharpe_ratio, annual_return, max_down= backtest_cs.describer_01(long_portfolio_data,short_portfolio_data) 画出分组累计收益 PlotCS.plot_group_cumsum_pnl(clean_factor_data) 画出long-short多空收益 ret_df.plot(figsize=(16, 9), title=\"test\") 基本上你自己定义一个因子,之后就直接开始研究了。我这个框架是学习alphalens写的,因为alphalens 太慢了,所以,就自己实现了,要快些。没有做任何封装,理解起来容易些。所有曲线没有计算手续费,没有计算对冲成本。 ​ 投资组合流程（供参考） 引入相应模块 # coding: utf-8 import plutus.research.backtest.backtest as ba import pandas as pd import numpy as np import empyrical as empl import matplotlib.pyplot as plt from plutus.portfolio.portfolio_cal.portfolio_base import PortfolioBase backtest_cs=ba.BacktestCS() portfolio_base =PortfolioBase() 读取行情数据 all_1d_df = pd.read_parquet(\"../../../datahub/raw/cn/stock/md/all_1d.parquet\") all_1d_df.set_index([\"trading_date\", \"code\"], inplace=True) all_1d_df['ret_1d']= all_1d_df['close']/all_1d_df['pre_close']-1 all_1d_df.head() 读取signal数据 all_1d_df = pd.read_parquet(\"../../../datahub/raw/cn/stock/md/all_1d.parquet\") all_1d_df.set_index([\"trading_date\", \"code\"], inplace=True) all_1d_df['ret_1d']= all_1d_df['close']/all_1d_df['pre_close']-1 all_1d_df.head() 计算每日收益 all_pnl_1d_df = all_signal_df.groupby(['name','trading_date'])['pnl_1d'].mean() all_pnl_1d_df=all_pnl_1d_df.unstack().T all_pnl_1d_df.dropna(inplace=True) all_pnl_1d_df.head() 筛选出需要的因子(有未来数据) calmar_ratio_df= portfolio_base.cal_calmar_ratio(all_pnl_1d_df) select_s = np.where(abs(calmar_ratio_df)>0.5,1,np.nan) selected_pnl_1d_df = all_pnl_1d_df.mul(select_s,axis=1) 计算因子组合权重(有未来数据) portfolio_weight_s = portfolio_base.cal_weight(selected_pnl_1d_df) portfolio_weight_s 计算组合净值收益(有未来数据) net_s = all_pnl_1d_df.mul(portfolio_weight_s).sum(axis=1) net_s.cumsum().plot() powered by Gitbook修订时间： 2022-06-20 11:28:16 "
+    },
+    "doc/project_doc/factorhub.html": {
+        "url": "doc/project_doc/factorhub.html",
+        "title": "factorhub",
+        "keywords": "",
+        "body": "factorhub factorhub包含以下部分： 因子数据库； 这个数据库可以是你喜欢的任意形式,为方便上传,该项目采用的parquet文件存储； 投研环境下,相关因子检验,请阅读plutus.research模块 生产环境下,批量计算因子,请查看plutus.factor模块 因子面板(更新中); 一个因子交换和交流平台(目前是以微信群的方式); 有想加入的小伙伴,请私下联系； powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/signalhub.html": {
+        "url": "doc/project_doc/signalhub.html",
+        "title": "signalhub",
+        "keywords": "",
+        "body": "signalhub powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/tradehub.html": {
+        "url": "doc/project_doc/tradehub.html",
+        "title": "tradehub",
+        "keywords": "",
+        "body": "tradehub 关于交易,我们的理念是,不同标的,不同策略,可能需要的交易框架是不一样的。你喜欢的,适合的就是最好的； 所以,我们直接集成了一些优秀的开源交易框架： wondertrader ctpbee fk_ctp 期待能与更多的开源框架作者建立联系,感谢你们为开源社区做出的贡献~ powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/lovehub.html": {
+        "url": "doc/project_doc/lovehub.html",
+        "title": "lovehub",
+        "keywords": "",
+        "body": "Lovehub 是一个金融圈婚恋交友社区,目前和一些专业的狐妖小红娘小范围尝试合作中~ powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/jobhub.html": {
+        "url": "doc/project_doc/jobhub.html",
+        "title": "jobhub",
+        "keywords": "",
+        "body": "jobhub 一个方便业内同仁进行招聘与求职的板块 目前是和以下金融ip小伙伴,同步更新,微信群,微信公众号,知乎等等自媒体； 同步更新的金融ip小伙伴有： quanthub（知乎，gitee,github） 浪说量化（微信公众号） 期待能与更多的金融自媒体和IP建立联系 如需招聘,您可以发送jd到email：jiangtiantu@hotmail.com 如需求职,您可以发简历到email：jiangtiantu@hotmail.com 如需职业规划,职业建议,请联系wechat：jtt_xm 方案一(付费)：会帮助咨询者邀请一位资深猎头+一位业内老兵,以电话会议的方式，专业答疑，不满意，退全款 方案二(free):随缘聊天，看缘分（蛤蛤） 以及建立一个白名单,如果xdm觉得自己东家还很不错的话,就把公司名字提交到名单中吧； powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/gamehub.html": {
+        "url": "doc/project_doc/gamehub.html",
+        "title": "gamehub",
+        "keywords": "",
+        "body": "gamehub 一个通过组织打游戏,爬山等活动,打破社交圈的小板块。 目前是以微信群的形式存在,由小伙伴们自发组织活动,还没有想到更好的载体/(ㄒoㄒ)/~~； 线上活动： 王者荣耀 LOL 动物森林 原神 吃鸡战场 线下活动： 德州扑克 麻将 酒酒酒 剧本杀 狼人杀 登山 潜水/冲浪 小龙虾 powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    },
+    "doc/project_doc/一些早期的整理.html": {
+        "url": "doc/project_doc/一些早期的整理.html",
+        "title": "其他",
+        "keywords": "",
+        "body": "集成开发环境： anaconda ：最流行的python集成开发环境,避免初学者很多麻烦； 编辑器：vscode；pycharm；vstudio,clion 等等； 编程教程: B站视频：python /C++ 鱼C-小甲鱼；黑马程序员； 代码规范：Google 开源项目风格指南 (中文版) 网页教程：菜鸟教程等等 在线教程：windquant 的在线教程；joinquant 的在线教程；quantopian在线教程；digquant在线教程（部分付费）（更适合想做quant的新人） 开源框架（排名不分先后）： 数据解决方案： tushare：小编了解到的最早的开源数据解决方案,比较成熟,采用积分制拿数据 BaoStock：证券宝旗下的一个免费、开源的证券数据平台（无需注册） wind：国内资历最老的数据服务商,应该也是最全的（付费） jqdata:聚宽旗下的数据接口,可以免费试用一年（付费） rqdata：ricequant旗下的数据服务（付费） 朝阳永续 ：另类数据,值得一买（ 付费） 天软数据 ：没用过,不了解（付费） 通联数据：优矿母公司,除基础数据外有部分特色数据和爬虫数据,如电商消费数据,宏观数据,私募数据 数库：有一些产业链知识图谱数据 虎博：定制化数据收集,定制化舆情数据处理 choice：同花顺数据库,有edb数据,比wind便宜 路透：改名叫什么refinive,外盘数据,宏观数据 百度：搞了个因子平台,但是没开放,后续不是很清楚 彭博 恒生聚源 国泰安 深交所、上交所,以及交易所授权第三方数据转发商 直达国际,外盘数据,但是一般不单做数据服务,一般是交易客户附带数据服务 交易框架： ctpbee：一个可以7*24小时无运维的p(i)y(an)交易框架,开发者很年轻, 非常秀 即将接入QA界面 遵循QIFI协议 目前只具备ctp行情交易功能 PandoraTrader：一个c++的CTP交易框架,逻辑特别清晰 wondertrader：一个很棒的企业级框架 回测框架： jqfactor：猜测是聚宽修改的alphalens ,提供了一些数据下载功能。 alphalens:quantopian旗下的多因子分析框架,用作国内的话,建议自己修改下 zipline：quantopian旗下的回测框架,个人建议你自己参考着写一个 rqalpha：ricequant提供的数据和回测方案 talib：一个指标库 集成框架： quantaxis：支持 python/rust 的数据下载 自动运维 策略编写 模拟实盘(a 股/期货/期权/港美股/数字货币), 支持可配置的自定义账户和组合协议(QIFI), 支持股票/期货市场全推的数据协议(MIFI), 支持策略打点和动态画图的界面可视化协议(VIFI), 支持 a 股/ 期货/ 港美股的实盘交易及本地无限制账户的模拟盘. 支持 docker 一键部署和局域网内的 k8s 集群部署, 基于 celery/rabbitmq 实现分布式的回测/模拟/实盘的任务队列. 支持行情二次重采样, 账户订单二次转发, 订单流风控. 支持完全自定义的行情分发(模拟/真实/OU 随机过程)以及行情回放(用于复盘/模拟环境创建). 支持基于 QIFI 协议的各种客户端的自行接入(手机 APP/网页 web/终端) ,目前为私募自用框架, python 部分完全开源, rust 部分以 docker 微服务形式提供 kungfu：董可人大佬的开源作品,特色是低延迟,内存数据库 vnpy：国内历史最久且实盘用户最多的框架,文档/功能丰富,要维护数据库 tqsdk：快期旗下,逻辑最简单,数据库有快期专门维护。实盘最容易 掘金sdk：Python、C++、C#、Matlab,本地客户端,支持回测和实盘交易（掘金量化支持的券商：东方财富、东兴、光大、英大、申港、华鑫、万和、信达） 国内实盘交易解决方案： 个人用户： qmt,迅投出品,为个人投资者定制 tushare 那提供的一套合规解决方案（联系米哥） 策略易/puppet ,开源python界面控制,对券商几乎无限制 机构用户： 华泰,matic,量化客户端,策略编辑+回测+交易 中泰,xtp,多量化终端 华宝,lts 中信,cats中间集成了量化功能 广发,跟聚宽合作的web版 国信,tradestation,iquant平台,据说新款本⼀地版是迅投的 第一创业,跟聚宽合作的web 银河apama,金证丽海弘金 国泰君安,君易,君智 招商,X,α和t三个系列系统 中信建投据说上过autotrader,不确定 申万,xbc极速柜台系统支持量化 平安PAQuant 东方,东方睿阳、东方睿翼、东方睿 华鑫,奇点 华创,tradeX 天风,应该是跟聚宽有合作 湘财,5套 中金,fts 华林,宽睿系统 国外实盘交易解决方案： IB、富途、老虎,直达国际,cme清算会员、新加坡交易所会员单位,港交所券商期货资管拍照,colt专线直连上海数据中心 国内的交易柜台（就bu详细介绍了,只有高频玩家才会注意他们的差别）： 顶点/泰琰/恒生/金证/华睿/根网/ctp,ctpmini/广策/盛立/艾克朗科/飞马/多版本/xone/易盛/量投 值得关注的公众号： 量化投资与机器学习：wind 旗下出品,平时分享很多前沿研究资料,可以招聘 因子动物园:刘博出品,必属精品 王的机器:机器学习相关,由新加坡一位老前辈出品,快乐机器学习 高频数据:分享很多前沿的高频资料 海通量化团队:海通金工出品 浪说量化：某fof基金大佬,出品 川总写量化：川博出品,必属精品 Chihiro Quantitative Research： 刀哥出品,大类资产配置相关,跟他学到很多 alpha:群友Nathan的个人博客,https://alpha.exposed 其他常用工具（引自刀疤连大佬）： 研究项目：研究项目用cookiecutter-data-science建立,包括数据、代码、笔记、参考资料和报告等部分。 报告规范：研究报告或工作报告我习惯用APA格式,文献和资料习惯命名为：作者-文章名-年份。 文献管理：文献管理我用的是mendeley,无论是文献的分类、存储和检索,还是做笔记,或者是协同分享,体验都不错。 思维导图:思维导图软件有很多,功能大同小异,建议使用coggle,轻量、大气和酷炫。 研究项目管理:量化研究项目会涉及到数据、文献、代码和笔记等,一般的协同软件（如有道云协作）并不能很友好地支持这些文件。推荐使用gitlab,它和GitHub几乎一样,但私有项目不用收费,界面也萌一点。 数据库管理工具:navicat是一款神奇的软件,无论你用MySQL、SQL Server、SQLite、Oracle还是PostgreSQL,都可以统一管理。另外,其模型设计部分也非常好用,赞一波。 人气社区（排名不分先后）： quanthub（只是一个微信群,quant们的小公会） paperhub（只是一个paper群,里面有各种值得看一看的学习资料） joinquant /windquant/ricequant：感觉是国内最活跃的,一些大佬的分享值得一看 uqer：背靠通联数据,还有萝卜投研下研报也挺好,还有些宏观分析的工具 digquant：自有autotrader软件,支持期货等实盘交易,支持matlab、python等多种语言,目前团队转型主要做量化培训和社区运营。 bigquant：AI量化,中信几家传说有合作。也是类似聚宽等的网页版投研平台和论坛结合的形式。 quantaxis 论坛：quantaxis 的社区,主要是quantaxis 使用过程中的经验分享 果仁网：非编程量化 mindgo：同花顺旗下量化平台 powered by Gitbook修订时间： 2022-06-17 11:22:08 "
+    }
+}
